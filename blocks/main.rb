@@ -12,6 +12,7 @@ run_yield do |p|
   puts "you got #{p}"
 end
 
-run_yield { |p|
+run_yield { |p,n|
   puts "braces got #{p}"
+  puts n.inspect
 }
