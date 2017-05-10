@@ -1,5 +1,9 @@
 
 def run_block(&blk)
-  blk.call
+  blk.call "from block"
+end
+
+def run_yield
+  yield "from yield"
 end
 
