@@ -24,6 +24,7 @@ module Fluent::Plugin
     # If the configuration is invalid, raise Fluent::ConfigError.
     def configure(conf)
       super
+      log.debug "does Log exist: #{!!Fluent::Log rescue false}"
       log.debug "configure called..."
       # You can also refer to raw parameter via conf[name].
       @port = conf['port']

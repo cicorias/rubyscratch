@@ -126,6 +126,7 @@ module Ethereum
 
           def stop kind
             logInfo  "Attempt to terminate WebSocket and EM Server with #{kind}"
+            @thinkToCall.call()
             EM::WebSocket.stop
             logInfo  'Terminating EM Server'
           end
