@@ -1,4 +1,5 @@
 require 'fluent/plugin/input'
+require "#{File.dirname(__FILE__)}/server"
 
 module Fluent::Plugin
   class EthereumTelemetry < Input
@@ -23,10 +24,15 @@ module Fluent::Plugin
     # If the configuration is invalid, raise Fluent::ConfigError.
     def configure(conf)
       super
+      log.debug "does Log exist: #{!!Fluent::Log rescue false}"
       log.debug "configure called..."
       # You can also refer to raw parameter via conf[name].
       @port = conf['port']
       #...
+      @server = Ethereum::Ethstats.new "in fluetnd" do |dm|
+        log.debug "in new..."
+      end
+
 
       log.info "configure with #{conf.inspect}"
     end
@@ -37,6 +43,8 @@ module Fluent::Plugin
       super
       #...
       log.debug "start called..."
+      @server.run
+      log.debug "start called (done)..."
     end
 
     # This method is called when shutting down.
@@ -45,7 +53,16 @@ module Fluent::Plugin
       super
       #...
       log.debug "shutdown called..."
+
+      @server.stop "WHO"
+
     end
+
+    def dumbMethod
+      log.debug "dumb method called..."
+      yield
+    end
+
   end
 end
 

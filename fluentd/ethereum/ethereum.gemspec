@@ -6,7 +6,6 @@ require 'fluent/plugin/version'
 Gem::Specification.new do |gem|
   gem.name          = "fluent-plugin-ethereum"
   gem.version       = Ethereum::VERSION
-  puts gem.version
   gem.authors       = ["Shawn Cicoria"]
   gem.email         = ["github@cicoria.com"]
 
@@ -19,7 +18,6 @@ Gem::Specification.new do |gem|
 
   gem.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
-    puts f
   end
   gem.test_files  = `git ls-files -- {test,gem,features}/*`.split("\n")
   gem.executables = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
